@@ -1,0 +1,9 @@
+.image-upload{
+	display: none;
+}
+.addphoto{
+	cursor: pointer;
+}
+.loginerror{
+	color: #ffcc00;
+}

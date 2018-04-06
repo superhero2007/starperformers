@@ -1,0 +1,78 @@
+  <nav class="navbar navbar-dark sticky-top navbar-expand-lg navbar-login">
+      <div class="container-fluid align-items-lg-end">
+         <a class="navbar-brand" routerLink="/home"><img src="../../../../assets/img/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <a routerLink="/login/Bosignup" class="btn btn-warning mt-3 mt-lg-0 mx-auto">Business Owner?</a>
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" routerLink="/login/splogin">Login</a>
+          </div>
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" routerLink="/">< Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="d-flex m-h-100 text-center section-login">
+        <div class="my-auto w-100">
+          <div class="container">
+
+            <div class="bg-login">
+
+              <div class="row">
+                <div class="col-lg-6">
+  
+                  <div class="block-wrap">
+                    <div class="block">
+                      <div class="h3"><strong>Welcome Star performer</strong></div>
+                      <div class="h5 mt-5">Sign Up For Free</div>
+                      <div class="h5 mb-5">Already have an account? <a routerLink="/login/splogin">Login</a></div>
+                      
+                      <p class="loginerror">{{loginerror}}</p>
+                      <form #SignupForm = "ngForm" (ngSubmit)="onsignup(SignupForm.value)" ngNativeValidate>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <input type="text" id="firstName" #fname class="form-control" name="firstName" placeholder="First Name" required ngModel >
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <input type="text" id="lastName" #lname class="form-control" name="lastName" placeholder="Last Name" ngModel>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group">
+                              <input type="email"  id="myEmail" #email class="form-control" name="email" placeholder="e-mail" required ngModel>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group">
+                              <input type="password"  id="myPassword" #password class="form-control" name="password" placeholder="Password"  minlength="6" (onkeyup)="passwordValidate(password)" required ngModel>
+                            </div>
+
+                          </div>
+                          <div class="col-12 text-center fz-10 mb-3">
+                            <strong>By Signing Up, I agree to Starperformers <a href="#" class="">Terms Of Use</a> and <a href="">Privacy Policy</a></strong>
+                          </div>
+                          <div class="col-12 text-center">
+                            <button type="submit" id="btnJoinNow" class="btn btn-warning">Join Now</button>
+                          </div>
+                        </div>
+                        <div  id="resultDiv"></div>
+                      </form>
+
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+    </section>

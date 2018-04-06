@@ -1,0 +1,94 @@
+  <nav class="navbar navbar-dark sticky-top navbar-expand-lg navbar-login">
+      <div class="container-fluid align-items-lg-end">
+         <a class="navbar-brand" routerLink="/home"><img src="../../../../assets/img/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <a routerLink="/login/Spsignup" class="btn btn-warning mt-3 mt-lg-0 mx-auto">Service Provider?</a>
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" routerLink="/">< Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="d-flex m-h-100 text-center section-login">
+        <div class="my-auto w-100">
+          <div class="container">
+
+            <div class="bg-login bg-login-2">
+
+              <div class="row">
+                <div class="col-lg-6">
+  
+                  <div class="block-wrap">
+                    <div class="block">
+                      <div class="h3"><strong>Welcome Back Business Owner</strong></div>
+                      <div class="h5 mt-5">Not a member?</div>
+                      <div class="h5 mb-5"><a routerLink="/login/Bosignup">Sign Up</a> for free</div>
+
+                      <form #boLoginForm = "ngForm" (ngSubmit)="onbologin(boLoginForm.value)"ngNativeValidate>
+                        <div class="form-group">
+                          <input type="email"  id="myEmail" name="email" #emailInput class="form-control" placeholder="Email" required  ngModel>
+                        </div>
+                        <div class="form-group">
+                          <input type="password"  id="myPassword" name="password" #passInput class="form-control" placeholder="Password" required ngModel>
+                        </div>
+                        <div class="text-center">
+						              <button type="submit" id="btnJoinNow" class="btn btn-warning">Login</button>
+                        </div>
+                        <div class="text-center fz-10 mt-3">
+                          <strong><a routerLink="/" data-toggle="modal" data-target="#modal-forgotpass">Forgot Password?</a></strong>
+                        </div>
+                        <div  id="resultDiv"></div>
+                      </form>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+    </section>
+
+<!-- forget passwor popup -->
+    <div class="modal fade" id="modal-forgotpass" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="text-center fz-20"><strong>Fill for new password</strong></div>
+
+            <form #forgotpass = "ngForm" (ngSubmit)="onforgotpass(forgotpass.value)"ngNativeValidate>
+              <div class="row">
+                <div class="col-sm">
+                  <div class="form-group form-group-min">
+                    <p class="mb-1"><strong>Email</strong></p>
+                    <input type="text" class="form-control form-control-min" name="email" placeholder="email" #email ngModel required>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <div class="form-group form-group-min">
+                    <p class="mb-1"><strong>Phone number</strong></p>
+                    <input type="text" class="form-control form-control-min" placeholder="password" name="password" #password ngModel required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row justify-content-end">
+                <div class="col-sm-auto">
+                  <button type="submit" class="btn btn-min btn-block btn-warning mb-3">Save</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>

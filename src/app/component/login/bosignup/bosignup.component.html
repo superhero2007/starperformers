@@ -1,0 +1,75 @@
+  <nav class="navbar navbar-dark sticky-top navbar-expand-lg navbar-login">
+      <div class="container-fluid align-items-lg-end">
+         <a class="navbar-brand" routerLink="/home"><img src="../../../../assets/img/logo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <a routerLink="/login/Spsignup" class="btn btn-warning mt-3 mt-lg-0 mx-auto">Service Professional?</a>
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" routerLink="/">< Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+   <section class="d-flex m-h-100 text-center section-login">
+        <div class="my-auto w-100">
+          <div class="container">
+
+            <div class="bg-login bg-login-1">
+
+              <div class="row">
+                <div class="col-lg-6">
+  
+                  <div class="block-wrap">
+                    <div class="block">
+                      <div class="h3"><strong>Welcome Business Owner</strong></div>
+                      <div class="h5 mt-5">Sign Up For Free</div>
+                      <div class="h5 mb-5">Already have an account? <a routerLink="/login/bologin">Login</a></div>
+
+                      <form #boSignupForm = "ngForm" (ngSubmit)="onsignup(boSignupForm.value)">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <input type="text" id="firstName" #fname name="fname" class="form-control" placeholder="First Name" ngModel>
+                             
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <input type="text" id="lastName" #lname name="lnaame" class="form-control" placeholder="Last Name" ngModel>
+                              
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group">
+                              <input type="email"  id="myEmail" #emailInput name="email" class="form-control" placeholder="e-mail" ngModel>
+                              
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group">
+                              <input type="password"  id="myPassword" #passlInput name="password" class="form-control" placeholder="Password" ngModel>
+                            </div>
+                          </div>
+                          <div class="col-12 text-center fz-10 mb-3">
+                            <strong>By Signing Up, I agree to Starperformers <a href="#" class="">Terms Of Use</a> and <a href="#">Privacy Policy</a></strong>
+                          </div>
+                          <div class="col-12 text-center">
+                            <button type="submit" href="javascript:void(0)" id="btnJoinNow" class="btn btn-warning">Join Now</button>
+                          </div>
+                        </div>
+                        <div  id="resultDiv"></div>
+                      </form>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+    </section>

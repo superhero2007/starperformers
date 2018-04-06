@@ -1,0 +1,130 @@
+.choose-file{
+	display: none;
+}
+.fz-18:hover .choose-file{
+	display: block;
+	cursor: pointer;
+}
+.addphoto{
+	cursor: pointer;
+}
+.col-sm-auto.has-control {
+   flex: auto;
+}
+.dashboard-block-min .expinfo p{
+	font-size: 17px;
+	text-transform: capitalize;
+}
+.expinfo {
+    border-bottom: 1px solid #f4c400;
+    margin-bottom: 20px;
+}
+
+.expinfo:last-child {
+    border: transparent;
+}
+span {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.expinfo p:first-child {
+    font-weight: bold;
+}
+.fz-25 {
+    text-transform: capitalize;
+}
+.show-data{
+	border: 1px solid #ff0000;
+    margin-bottom: 5px;
+
+}
+.fill{
+	border:transparent;
+
+}
+.profile_image{
+	height: 100%;
+}
+.user.user-big.fz-18 img {
+    height: 100%;
+}
+.expinfo a:hover {
+    color: #00ff00;
+}
+.expinfo .btn {
+    font-size: 20px;
+    font-weight: 500;
+    white-space: normal;
+    border-radius: 5px;
+    padding: 1px 10px;
+    cursor: pointer;
+}
+.expinfo .btn-danger{
+    color:#fff;
+}
+.dashboard-block-title {
+    padding-bottom: 20px;
+    border-bottom: transparent; 
+    margin-bottom: 36px;
+}
+a {
+    cursor: pointer;
+}
+.cancel_btn{
+    color: #fff!important;
+    border-radius: 10px!important;
+}
+.summary-icon {
+   display: block;
+    text-align: right;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    cursor: pointer;
+    border: 2px solid #f4c400;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    line-height: 15px;
+}
+.dashboard-block-min {
+    position: relative;
+}
+.dashboard-block-title{
+    margin-bottom: 5px;
+}
+.btn-center{
+    margin: 0 auto;
+}
+.gray.semibold{
+    font-size: 16px;
+}
+div.red {
+    color: #ff0000;
+}
+.edit_btn.btn {
+    padding: 3px 15px;
+    cursor: pointer;
+}
+.experienceList {
+    border-bottom: 1px solid #f4c400;
+    margin: 0px 0 30px 0;
+}
+a.btn.btn-danger.edit_btn .fa {
+   color: #fff;
+}
+.loginerror{
+    color: #ff0000;
+}
+.form-control:focus {
+  background-color: #fff;
+}
+p.strength_field{
+    font-size: 19px;
+}
+.highlight {
+    border: 3px solid #f4c300;
+}

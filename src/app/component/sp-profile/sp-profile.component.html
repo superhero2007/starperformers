@@ -1,0 +1,460 @@
+<!-- Header section start -->
+    <nav class="navbar navbar-dark sticky-top navbar-expand-lg">
+      <div class="container-fluid align-items-lg-end">
+        <a class="navbar-brand" routerLink="/"><img src="../../../assets/img/logo.png"></a>
+        <button class="navbar-toggler mr-auto" type="button" id="sandwich">
+          <i class="fa fa-angle-right fa-2x"></i>
+        </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="#">Job Board</a>
+            <a class="nav-item nav-link" href="#">Resources</a>
+            <a class="btn btn-warning nav-item nav-link" href="SPSignup.html">Earn Cash</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+<!-- Header section end -->
+
+    <div class="row mx-0">
+
+      <div class="col-md-4 px-0 sidebar position-sticky">
+          <img src="../../../assets/img/bg-dash-min.jpg" alt="" class="w-100 ">
+        <div class="col">
+
+          <div class="info-block text-center">
+            <div class="user">
+              <img [src]="profile_image || '../../../assets/img/bg-dash-min.jpg'" alt="" class="profile_image w-100">
+            </div>
+            <div><strong>{{current_user.firstname}} {{current_user.lastname}}</strong></div>
+            <p class="fz-15">Lives {{settingInfo?.city}}, {{settingInfo?.state}}</p>
+            <div class="progress">
+              <div class="progress-bar bg-warning" role="progressbar" [ngStyle]="{'width.%':profile_progress }" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <p class="strength_field">Profile Strength: {{profile_progress}}%</p>
+          </div>
+
+          <div class="sidebar-content">
+            <p>
+              <a ><strong>Profile</strong></a>
+             
+              <a class="fz-18">Contact Informatiom</a>
+              <a class="fz-18 show-data" (click)="highlightArea(1,'summary')" [ngClass]="{'fill':summaryShowborder}">Summary</a>
+              <a class="fz-18 show-data" (click)="highlightArea(2,'experience')" [ngClass]="{'fill':this.experienceList?.length }">Experience  ({{this.experienceList.length}}/{{settingInfo?.job_count}})</a>
+
+              <a class="fz-18 show-data" (click)="highlightArea(3,'education')" [ngClass]="{'fill':this.educationList.length}">Education (0/{{education_field}})</a>
+              <a class="fz-18 show-data " (click)="highlightArea(4,'certificate')" [ngClass]="{'fill':this.certificateList.length}">Certifications</a>
+            </p>
+            <p>
+              <a routerLink="/"><strong>Job Dashboard</strong></a>
+              <a routerLink="/" class="fz-18">Job Preferences</a>
+              <a routerLink="/" class="fz-18">Recommended Jobs</a>
+              <a routerLink="/" class="fz-18">My Resume</a>
+            </p>
+            <p>
+              <a routerLink="/" data-toggle="modal" id="settingmodal" data-target="#modal-settings">Settings</a>
+              <a (click)="logoutUser()">Log Out</a>
+              <a routerLink="/">Get Help</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col p-0 py-4">
+
+        <div class="col">
+          <div class="dashboard-content">
+            <div class="text-center mt-2 mb-4"><i>“We will Display Expert Tips and Inapp messages from Admin here”</i></div>
+            <div class="bg-dash-wrap"></div>
+            <div class="dashboard-block">
+              <div class="text-center">
+                <div class="user user-big fz-18">
+                   <img [src]="profile_image || '../../../assets/img/bg-dash-min.jpg'" alt="" class="w-100">
+                  <form>
+                  <div class="form-group"> 
+                    <input name="myFile" #fileInput class="image-upload" type="file" hidden (change)="uploadFile($event)" ngModel accept="image/*" />
+                      <div class="choose-file">
+                        <a (click)="chooseFileEnable()" class="addphoto" *ngIf="!image_status;else change_text">Add Photo</a>
+                        <ng-template #change_text>
+                          <a (click)="chooseFileEnable()" class="addphoto"  >Update</a>
+                        </ng-template>
+                      </div>
+                  </div>
+              </form>
+                </div>
+                <div class="fz-25"><strong>{{current_user.firstname}} {{current_user.lastname}}</strong></div>
+                <p class="mb-5">Current Job, {{settingInfo?.city}}, {{settingInfo?.state}}</p>
+              </div>
+
+<!-- Summary section -->
+
+              <div class="dashboard-block-min" [ngClass]="{'highlight': this.highlightSection == 1}"  id="summary">
+                <div class="dashboard-block-title"><strong>Summary</strong></div>
+                <div class="summary_Edit" *ngIf="summaryInfo">
+                  <i class="fa fa-pencil summary-icon" (click)="summaryInfo = !summaryInfo" aria-hidden="true"></i>
+                  <p [innerHtml]="summary_Info"></p>
+                </div>
+                <div  *ngIf="!summaryInfo">
+                    <form #summaryForm = "ngForm" (ngSubmit)="onSummary(summaryForm.value)" ngNativeValidate >
+                        <div class="form-group">
+                            <textarea type="text" name="summary_Info" class="form-control form-control-min" placeholder="Write your Summary here..." [(ngModel)]="summary_Info"></textarea>
+                        </div>
+                        <div class="row justify-content-center pt-2 pb-3">
+                          <div class="col-sm-auto px-xl-4">
+                            <a  type="button" class="btn btn-block btn-dark mb-3 cancel_btn" (click)="summaryInfo = !summaryInfo">Cancel</a>
+                          </div>
+                          <div class="col-sm-auto px-xl-4">
+                            <button type="submit"  class="btn btn-block btn-warning mb-3 ">Save</button>
+                          </div>
+                        </div>
+                    </form>
+                </div>
+              </div>
+<!-- Experience and  Education and certifications popup-->
+
+<!-- Experience popup -->
+              <div class="dashboard-block-min" [ngClass]="{'highlight': this.highlightSection == 2}" id="experience">
+                <div class="dashboard-block-title"><strong>Experience <a href="#" class="ml-1" data-toggle="modal" data-target="#modal-experience"><img src="../../../assets/img/plus.png" alt=""></a></strong></div>
+                <div class="experienceList" *ngFor="let experience of experienceList; let i = index;">
+                  <div class="row">
+                    <div class="col-sm-5 ">
+                        <p>{{experience?.company}}</p>
+                        <p>{{experience?.state}},{{experience?.city}}</p>
+                      </div>
+                      <div class="col-sm-5">
+                      <span *ngIf="experience?.present">
+                         {{experience?.from_month}}.{{experience?.from_year}} - Present
+                      </span>
+                      <span *ngIf="!experience?.present">
+                         {{experience?.from_month}}.{{experience?.from_year}} - {{experience?.to_month}}.{{experience?.to_year}}
+                      </span>
+                      </div>
+                      <div class="col-sm-1 text-right">
+                        <a  class="btn btn-success edit_btn" (click)="updateExperience(experience,i)" href="#" id="experienceUpdate" data-toggle="modal" data-target="#modal-experience"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      </div>
+                      <div class="col-sm-1">
+                         <a class="btn btn-danger edit_btn" (click)="removeExperience(i,experience._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                      </div>
+                      
+                  </div>
+
+                  <div>
+                    <p>{{experience?.responsibility1}}</p>
+                    <p>{{experience?.responsibility2}}</p>
+                  </div>
+              </div>
+              </div>
+
+<!--Education  -->
+              <div class="dashboard-block-min" [ngClass]="{'highlight': this.highlightSection == 3}" id="education">
+                <div class="dashboard-block-title"><strong>Education <a href="#" class="ml-1" data-toggle="modal" data-target="#modal-eduction"><img src="../../../assets/img/plus.png" alt=""></a></strong>
+                <div class="experienceList" *ngFor="let education of educationList; let i = index;">
+                  <div class="row">
+                    <div class="col-sm-5">
+                        <p>{{education?.education_level}}</p>
+                        <p>{{education?.school}}</p>
+                      </div>
+                      <div class="col-sm-5">
+                         <span *ngIf="education?.present">
+                          {{education?.begin_month}}.{{education?.begin_year}} - Present
+                        </span>
+                        <span *ngIf="!education?.present">
+                          {{education?.begin_month}}.{{education?.begin_year}}-{{education?.end_month}}.{{education?.end_year}}
+                        </span>
+                      </div> 
+                      <div class="col-sm-1 text-right">
+                        <a  class="btn btn-success edit_btn" (click)="updateEducation(education,i)" href="#" id="experienceUpdate" data-toggle="modal" data-target="#modal-eduction"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      </div>
+                      <div class="col-sm-1">
+                         <a class="btn btn-danger edit_btn" (click)="removeEducation(i,education._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                      </div>      
+                  </div>
+              </div>
+                </div>
+              </div>
+
+<!--certifications  -->
+              <div class="dashboard-block-min" [ngClass]="{'highlight': this.highlightSection == 4}" id="certificate">
+                <div class="dashboard-block-title"><strong>Certifications <a href="#" class="ml-1" data-toggle="modal" data-target="#modal-certifications "><img src="../../../assets/img/plus.png" alt=""></a></strong>
+                <div class="experienceList" *ngFor="let certificate of certificateList; let i = index;">
+                  <div class="row">
+                    <div class="col-sm-5">
+                        <p>{{certificate?.certificate_num}}</p>
+                        <p>{{certificate?.certification_type}}</p>
+                      </div>
+                      <div class="col-sm-1 text-right">
+                        <a  class="btn btn-success edit_btn" (click)="updatecertifications(certificate,i)" href="#" id="certificateListUpdate" data-toggle="modal" data-target="#modal-certifications"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                      </div>
+                      <div class="col-sm-1">
+                         <a class="btn btn-danger edit_btn" (click)="removecertifications(i,certificate._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                      </div>        
+                  </div>
+                 </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Experience popup -->
+    <div class="modal fade" id="modal-experience" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            <p class="text-center fz-20"><strong>Add New Experience</strong></p>
+            <p class="loginerror">{{loginerror}}</p>
+
+            <form #experienceForm = "ngForm" (ngSubmit)="onExperience(experienceForm.value)" ngNativeValidate  id="expForm">
+              <div class="form-group form-group-min">
+                <p class="mb-1"><strong>Where have you worked?</strong></p>
+                <input type="text" name="company" class="form-control form-control-min" placeholder="Company name" [ngModel]="experienceData.company" ngModel required>
+              </div>
+
+              <div class="form-group form-group-min" *ngIf="disableFields">
+                <p class="mb-1"><strong>What was your position?</strong></p>
+                <input type="text" name="position" class="form-control form-control-min" placeholder="Position name" [ngModel]="experienceData.position" required>
+              </div>
+              <div class="form-group form-group-min" >
+                <p class="mb-1"><strong>Zipcode</strong></p>
+                <input type="text" name="zipcode" pattern="[0-9]*" class="form-control form-control-min" placeholder="01234" [ngModel]="experienceData.zipcode" required>
+              </div>
+              <div class="form-group form-group-min">
+                <p class="mb-1"><strong>Responsibility 1</strong></p>
+                <textarea type="text" name="responsibility1" class="form-control form-control-min" placeholder="Write your responsibility 1 here..." [ngModel]="experienceData.responsibility1" required></textarea>
+              </div>
+              <div class="form-group form-group-min">
+                <p class="mb-1"><strong>Responsibility 1</strong></p>
+                <textarea type="text" name="responsibility2" class="form-control form-control-min" placeholder="Write your responsibility 2 here..." [ngModel]="experienceData.responsibility2" required></textarea>
+              </div>
+              <p class="mb-1"><strong>When did you work there?</strong></p>
+
+              <div class="row">
+                <div class="col-sm-auto has-control">
+                  <div class="form-group form-group-min">
+                     <my-date-picker name="from_year" [options]="myDatePickerOptionsfromyear"
+                   [(ngModel)]="from_year" (dateChanged)="limitDate($event)" required></my-date-picker>
+                  </div>
+                  </div>
+                <div class="col-sm-auto has-control" *ngIf="!experienceData.present">
+                  <div class="form-group form-group-min">
+                     <my-date-picker name="to_year" [options]="myDatePickerOptionstoyear"
+                    [(ngModel)]="to_year" required></my-date-picker>
+                  </div>
+                  </div>
+              </div>
+              <div class="form-group form-group-min">
+                <label class="checkbox-group radio-group-row">
+                  <input type="checkbox" name="present" [(ngModel)]="experienceData.present">
+                  <span class="switch"></span>
+                  <span class="checkbox-title"><strong>Present</strong></span>
+                </label>
+              </div>
+              <div class="row justify-content-end">
+                <div class="col-sm-auto">
+                  <button type="button" class="btn btn-min btn-block btn-dark mb-3" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="col-sm-auto">
+                  <button type="submit" class="btn btn-min btn-block btn-warning mb-3" id="save">Save</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--Education-->
+
+    <div class="modal fade" id="modal-eduction" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <p class="text-center fz-20"><strong>Add New Education</strong></p>
+            <p class="loginerror">{{loginerror}}</p>
+
+            <form #eduction = "ngForm" (ngSubmit)="onEducation(eduction.value)" ngNativeValidate id="eduForm" >
+              <div class="form-group form-group-min">
+                <p class="mb-1"><strong>Select an Education Level</strong></p>
+                <select class="form-control form-control-min" name="education_level" [ngModel]="educationData.education_level" required>
+                  <option value="" >Select</option>
+                 <option value="High School/GED" >High School/GED</option>
+                  <option value="Bachelor's Degree">Bachelor's Degree</option>
+                  <option value="Master's Degree">Master's Degree</option>
+                  <option value="Advanced Graduate">Advanced Graduate</option>
+                </select>
+              </div>
+              <div class="form-group form-group-min">
+                <p class="mb-1"><strong>Where did you go to school?</strong></p>
+                <input type="text" class="form-control form-control-min" name="school" [ngModel]="educationData.school" required>
+              </div>
+              <div class="form-group form-group-min" *ngIf="disableFields">
+                <p class="mb-1"><strong>What did you study?</strong></p>
+                <input type="text" class="form-control form-control-min" name="specialization" [ngModel]="educationData.specialization" required>
+              </div>
+              <p class="mb-1"><strong>From</strong></p>
+
+              <div class="row">
+                <div class="col-sm-auto has-control">
+                  <div class="form-group form-group-min">
+                  <my-date-picker name="begin_year"  [options]="myDatePickerOptionsfromyear"
+                    [(ngModel)]="from_year" (dateChanged)="limitDate($event)" required></my-date-picker>
+                  </div>
+                </div>
+                <div class="col-sm-auto py-sm-2 pb-2 pt-sm-0"><strong>To</strong></div>
+                <div class="col-sm-auto has-control" *ngIf = "!educationData.present">
+                  <div class="form-group form-group-min">
+                    <my-date-picker name="end_year" [options]="myDatePickerOptionstoyear"
+                    [(ngModel)]="to_year" required></my-date-picker>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group form-group-min">
+                <label class="checkbox-group radio-group-row">
+                  <input type="checkbox" name="present" [(ngModel)]="educationData.present">
+
+                  <span class="switch"></span>
+                  <span class="checkbox-title"><strong>Present</strong></span>
+                </label>
+              </div>
+              <div class="row justify-content-end">
+                <div class="col-sm-auto">
+                  <button type="button" class="btn btn-min btn-block btn-dark mb-3" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="col-sm-auto">
+                  <button type="submit"  class="btn btn-min btn-block btn-warning mb-3" onClick="modal_hide">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- certifications -->
+
+    <div class="modal fade" id="modal-certifications" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <p class="text-center fz-20"><strong>Add New Certifications</strong></p>
+            <p class="loginerror">{{loginerror}}</p>
+
+            <form #certifications = "ngForm" (ngSubmit)="oncertifications(certifications.value)" ngNativeValidate id="crtForm">
+
+              <div class="form-group form-group-min" *ngIf="disableFields">
+                <p class="mb-1"><strong>Certificate Type</strong></p>
+                  <select class="form-control form-control-min" name="certifications_type" [ngModel]="certificateListData.certifications_type" required>
+                    <option value="" >Select</option>
+                  <option value="High School/GED">High School/GED</option>
+                  <option value="Bachelor's Degree">Bachelor's Degree</option>
+                  <option value="Master's Degree">Master's Degree</option>
+                  <option value="Advanced Graduate">Advanced Graduate</option>
+                </select>
+              </div>
+              <div class="form-group form-group-min" *ngIf="disableFields">
+                <p class="mb-1"><strong>Certificate Number</strong></p>
+                <input type="text" class="form-control form-control-min" name="certifications_num"  [ngModel]="certificateListData.certifications_num" required>
+              </div>
+
+              <div class="row justify-content-end">
+                <div class="col-sm-auto">
+                  <button type="button" class="btn btn-min btn-block btn-dark mb-3" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="col-sm-auto">
+                  <button type="submit"  class="btn btn-min btn-block btn-warning mb-3">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--Settings popup -->
+
+    <div class="modal fade" id="modal-settings" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+         
+            <div class="text-center fz-20 red"><strong>Please fill information in below fields, without it you can't access another area of profile.</strong></div>
+            <p class="text-center fz-16 gray semibold">We use information to give you a better experience on Starperformers.</p>
+            
+            <p class="loginerror">{{zipcodeerror}}</p>
+            <form #setting = "ngForm" (ngSubmit)="onSetting(setting.value)" ngNativeValidate>
+              <div class="form-group form-group-min">
+                <p class="mb-1"><strong>What brings you to star performers?</strong></p>
+                <select class="form-control form-control-min" name="starperformer" #starperformer 
+                ngModel required>
+                <option value="" >Select</option>
+                  <option value="Performers">Performers 1</option>
+                  <option value="Performers">Performers 2</option>
+                  <option value="Performers">Performers 3</option>
+                </select>
+              </div>
+              <div class="row">
+                <div class="col-sm">
+                  <div class="form-group form-group-min">
+                    <p class="mb-1"><strong>Zipcode</strong></p>
+                    <input type="text" class="form-control form-control-min" name="zipcode" placeholder="01234" #zipcode ngModel required>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <div class="form-group form-group-min">
+                    <p class="mb-1"><strong>Phone number</strong></p>
+                    <input type="text" pattern="[0-9]*" minlength="10" maxlength="10" required class="form-control form-control-min" placeholder="9876543210" name="phone_no" #phoneNo ngModel required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-auto has-control">
+                  <div class="form-group form-group-min">
+                    <p class="mb-1"><strong>Highest Education Level</strong></p>
+                    <select class="form-control form-control-min" name="education"  ngModel required>
+                      <option value="" >Select</option>
+                      <option value="1">Masters</option>
+                      <option value="2">Lorem</option>
+                      <option value="3">Ipsum</option>
+                    </select>
+                  </div>
+                </div> 
+              </div>
+
+              <div class="form-group form-group-min">
+                <p class="mb-1"><strong>Approximate number of jobs held in last 5 years</strong></p>
+                <input type="number" pattern="[1-9]*" min="1" max="99" required class="form-control form-control-min" placeholder="7" name="job_count" #ApproximateNo ngModel>
+              </div>
+              <div class="row justify-content-centert text-center">
+                <div class="col-sm-auto btn-center">
+                  <button type="submit" class="btn btn-min btn-block btn-warning mb-3">Save</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
